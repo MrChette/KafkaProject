@@ -1,0 +1,13 @@
+com\project\hibernate\actionListener\UserActionsListener.class
+com\project\hibernate\repository\UserRepository.class
+com\project\hibernate\service\UserHistoricService.class
+com\project\hibernate\DataInitializer.class
+com\project\hibernate\service\UserService.class
+com\project\hibernate\SpringBootApplicationHibernate.class
+com\project\hibernate\Config.class
+com\project\hibernate\entity\UserEntity.class
+com\project\hibernate\entity\UserHistoric.class
+com\project\hibernate\repository\UserHistoricRepository.class
+com\project\hibernate\kafkaServices\KafkaConsumerConfig.class
+com\project\hibernate\kafkaServices\KafkaProducerService.class
+com\project\hibernate\kafkaServices\UserActionListener.class
