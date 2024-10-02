@@ -31,3 +31,6 @@ project.properties
 
 .war
 .jar
+hibernate/target/hibernate-0.0.1-SNAPSHOT.jar
+*.jar
+/restController/target
