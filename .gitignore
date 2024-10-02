@@ -28,3 +28,5 @@ application.properties
 project.properties
 *.properties
 project.properties
+
+.war
