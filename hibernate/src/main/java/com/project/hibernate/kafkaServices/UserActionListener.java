@@ -10,8 +10,11 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import com.project.hibernate.commons.Commons;
+import com.project.hibernate.commons.Parameters;
+import com.project.hibernate.entity.MessageInboxEntity;
 import com.project.hibernate.entity.UserEntity;
 import com.project.hibernate.entity.UserHistoric;
+import com.project.hibernate.repository.MessageInboxRepository;
 import com.project.hibernate.repository.UserHistoricRepository;
 import com.project.hibernate.service.MessagesService;
 
@@ -22,7 +25,13 @@ public class UserActionListener {
 	private MessagesService messagesService;
 	
 	@Autowired
+	private MessageInboxRepository messageInboxRepository;
+	
+	@Autowired
 	private Commons commons;
+	
+
+
 	
 
 	private static String userCreatedMessage = "CREATED_USER_MESSAGE";
@@ -50,8 +59,15 @@ public class UserActionListener {
             parameters.put("createdAt", user.getUpdatedAt().toString());
             
             String finalMessage = commons.generateMessage(message, parameters);
-            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            System.out.println(finalMessage);
+            
+            Parameters params = new Parameters();
+            MessageInboxEntity messageInbox = new MessageInboxEntity();
+            messageInbox.setHeader(params.MESSAGE_INBOX_HEADER_USERCREATED);
+            messageInbox.setMessage(finalMessage);
+            messageInbox.setStatus(params.MESSAGE_INBOX_STATUS_WAITING);
+            
+            
+            messageInboxRepository.save(messageInbox);          
             
             
             logger.info("\u001B[32mUserHistoric guardado para el usuario: {}\u001B[0m", user.getName()); 

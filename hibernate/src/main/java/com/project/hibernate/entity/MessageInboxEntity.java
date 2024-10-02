@@ -3,6 +3,7 @@ package com.project.hibernate.entity;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,24 +16,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "messagesModel")
-public class MessagesModelEntity {
-
+@Table(name = "messageInbox")
+public class MessageInboxEntity {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
-
-	@Column(name = "name")
-	private String name;
-
-	@Column(name = "message")
+	
+	@Column(name = "header")
+	private String header;
+	
+	@Column(name = "content")
 	private String message;
-
-	@Column(name = "display")
-	private boolean display;
-
+	
+	@Column(name = "status")
+	private String status;
+	
 	@Column(name = "createdAt")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
+	
 
 }

@@ -1,9 +1,11 @@
-com\project\hibernate\actionListener\UserActionsListener.class
+com\project\hibernate\entity\MessageInboxEntity.class
+com\project\hibernate\entity\MessagesInboxEntity.class
 com\project\hibernate\repository\UserRepository.class
+com\project\hibernate\commons\Parameters.class
 com\project\hibernate\service\UserHistoricService.class
 com\project\hibernate\service\UserService.class
-com\project\hibernate\entity\MessagesModelEntity.class
 com\project\hibernate\dto\MessageModelDTO.class
+com\project\hibernate\service\MessagesInboxService.class
 com\project\hibernate\SpringBootApplicationHibernate.class
 com\project\hibernate\Config.class
 com\project\hibernate\entity\UserEntity.class
@@ -13,5 +15,6 @@ com\project\hibernate\repository\UserHistoricRepository.class
 com\project\hibernate\kafkaServices\KafkaConsumerConfig.class
 com\project\hibernate\kafkaServices\KafkaProducerService.class
 com\project\hibernate\commons\Commons.class
+com\project\hibernate\repository\MessageInboxRepository.class
 com\project\hibernate\kafkaServices\UserActionListener.class
 com\project\hibernate\repository\MessagesModelRepository.class

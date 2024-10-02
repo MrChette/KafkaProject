@@ -2,7 +2,7 @@ package com.project.hibernate.entity;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.project.hibernate.kafkaServices.UserActionListener;
 
@@ -34,7 +34,7 @@ public class UserEntity {
 	  private Boolean  isActive;
 	  
 	  @Column(name = "updatedAt")
-	  @UpdateTimestamp
+	  @CreationTimestamp
 	  private LocalDateTime updatedAt;
 	  
 }
