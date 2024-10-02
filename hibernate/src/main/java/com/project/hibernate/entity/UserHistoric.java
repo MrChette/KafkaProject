@@ -9,13 +9,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "userHistoric")
 public class UserHistoric {
@@ -29,6 +27,13 @@ public class UserHistoric {
     private UserEntity user;
 	
 	@Column(name = "testUpdate") 
-	public String testUpdate;
+	private String testUpdate;
+
+	public UserHistoric(UserEntity user, String testUpdate) {
+		super();
+		this.user = user;
+		this.testUpdate = testUpdate;
+	}
+	
 	
 }
