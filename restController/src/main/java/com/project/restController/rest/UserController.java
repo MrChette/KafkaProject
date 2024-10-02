@@ -3,6 +3,7 @@ package com.project.restController.rest;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +21,9 @@ public class UserController {
 	@Autowired(required=true)
     private UserService userService;
 	
-	@PostMapping
-    public UserEntity createUser(@RequestBody UserEntity user) {
-        return userService.createUser(user);
+	@PostMapping("/createuser")
+    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
+        return ResponseEntity.ok(userService.createUser(user));
     }
 //
 //    @GetMapping
