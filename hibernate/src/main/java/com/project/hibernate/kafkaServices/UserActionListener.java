@@ -29,28 +29,35 @@ public class UserActionListener {
 	
 	@Autowired
 	private Commons commons;
-	
 
-
-	
 
 	private static String userCreatedMessage = "CREATED_USER_MESSAGE";
-    
-	private static final Logger logger = LoggerFactory.getLogger(UserActionListener.class);
+	private static final String userCreatedTopic = "user-created-topic";
+	private static final Logger logger = LoggerFactory.getLogger(UserActionListener.class);    
 
-    private final UserHistoricRepository userHistoricRepository;
     
+	private final UserHistoricRepository userHistoricRepository;
     public UserActionListener(UserHistoricRepository userHistoricRepository) {
         this.userHistoricRepository = userHistoricRepository;
     }
 
-    @KafkaListener(topics = "user-created-topic")
-    public void listen(UserEntity user) {
+    @KafkaListener(topics = userCreatedTopic, groupId = "user-group")
+    public void userHistoricUserCreatedListener(UserEntity user) {
         try {
             // Crear un nuevo UserHistoric sobre el User recibido
             UserHistoric historic = new UserHistoric(user, "Usuario creado: " + user.getName());
 
-            userHistoricRepository.save(historic);
+            userHistoricRepository.save(historic);           
+            
+            logger.info("\u001B[32mUserHistoric guardado para el usuario: {}\u001B[0m", user.getName()); 
+        } catch (Exception e) {
+            logger.error("\u001B[31mError procesando el mensaje para el usuario: {}\u001B[0m", user.getName(), e);
+        }
+    }
+    
+    @KafkaListener(topics = userCreatedTopic, groupId = "user-group")
+    public void messageInboxUserCreatedListener(UserEntity user) {
+        try {
             
             String message = messagesService.getMessageByName(userCreatedMessage).getMessage();
             
@@ -66,13 +73,11 @@ public class UserActionListener {
             messageInbox.setMessage(finalMessage);
             messageInbox.setStatus(params.MESSAGE_INBOX_STATUS_WAITING);
             
-            
             messageInboxRepository.save(messageInbox);          
             
-            
-            logger.info("\u001B[32mUserHistoric guardado para el usuario: {}\u001B[0m", user.getName()); 
+            logger.info("\u001B[32m{}\u001B[0m", messageInbox.toString()); 
         } catch (Exception e) {
-            logger.error("\u001B[31mError procesando el mensaje para el usuario: {}\u001B[0m", user.getName(), e);
+            logger.error("\u001B[31mError procesando messageInboxRepository \u001B[0m",  e.getMessage());
         }
     }
 }
