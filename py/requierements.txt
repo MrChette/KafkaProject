@@ -1,0 +1,3 @@
+pip install ampy
+pip install adafruit-ampy
+pip install requests
