@@ -1,36 +1,25 @@
-import requests
-
-url = "http://localhost:8080/api/user/createuser" 
+import requests  # Asegúrate de importar el módulo requests
 
 user = {
-    "name": "John Doe",
+    "name": "RaspBerryUser1",
     "isActive": True
 }
 
-import requests
 
-url = "http://localhost:8080/api/user/createuser"
 
-# Crear un nuevo usuario
-user = {
-    "name": "John Doe",
-    "isActive": True
-}
+url = "http://192.168.1.145:8080/api/user/createuser"  # Cambia la URL al endpoint correcto
 
-try:
-    # Enviar la solicitud POST
-    response = requests.post(url, json=user)
-    
-    # Comprobar el estado de la respuesta
-    if response.status_code == 200:
-        print("Usuario creado:", response.json())
-    else:
-        print("Error al crear usuario:", response.status_code, response.text)
 
-except requests.exceptions.ConnectionError:
-    print("Error: No se pudo conectar al servidor. Asegúrate de que el servidor esté en ejecución.")
-except requests.exceptions.Timeout:
-    print("Error: La solicitud ha superado el tiempo de espera.")
-except requests.exceptions.RequestException as e:
-    print("Error inesperado:", e)
+i = 1
 
+while i < 100:
+		user["name"] = "userandmessage" + str(i)
+		
+		try : 
+			response = requests.post(url,json = user)
+			response.raise_for_status()
+			print(f"Usuario creado {user['name']}: {response.status_code}")
+		except requests.exceptions.RequestException as e:
+				print(f"Error al enviar datos para {user['name']}: {e}")
+		
+		i += 1
